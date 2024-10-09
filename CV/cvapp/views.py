@@ -1,14 +1,35 @@
 from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from .models import File, Cv
+import pandas as pd
 
 # Create your views here.
 @login_required
 def home(request):
     if request.method == "POST":
         file = request.FILES['file']
-        file.objects.create(file=file)
+        obj = File.objects.create(file=file)
+        create_db(obj.file.path)
     return render(request, "home.html", {})
+
+def create_db(file_path):
+    df = pd.read_csv(file_path, delimiter=',',  encoding='ISO-8859-1', on_bad_lines='skip')
+    print(df.values)
+    list_of_csv = [list(row) for row in df.values]
+    for l in list_of_csv:
+        Cv.objects.create(
+            first_name = l[0],
+            last_name = l[1],
+            email = l[2],
+            phone_number = l[3],
+            id_number = l[4],
+            address = l[5],
+            education = l[6],
+            gender= l[7],
+            skills = l[8],
+            experience= l[9],
+        )
 
 def authView(request):
     if request.method == "POST":
