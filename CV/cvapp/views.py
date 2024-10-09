@@ -5,6 +5,9 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 @login_required
 def home(request):
+    if request.method == "POST":
+        file = request.FILES['file']
+        file.objects.create(file=file)
     return render(request, "home.html", {})
 
 def authView(request):
