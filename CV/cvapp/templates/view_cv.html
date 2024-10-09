@@ -1,0 +1,18 @@
+{% extends "base.html" %} {% block content %}
+<div class="shadow-wrap">
+  <div class="form-wrap">
+   
+    <h1>CV Details</h1>
+    <p><strong>First Name:</strong> {{ cv.first_name }}</p>
+    <p><strong>Last Name:</strong> {{ cv.last_name }}</p>
+    <p><strong>Email:</strong> {{ cv.email }}</p>
+    <p><strong>Phone Number:</strong> {{ cv.phone_number }}</p>
+    <p><strong>ID Number:</strong> {{ cv.id_number }}</p>
+    <p><strong>Address:</strong> {{ cv.address }}</p>
+    <p><strong>Education:</strong> {{ cv.education }}</p>
+    <p><strong>Gender:</strong> {{ cv.gender }}</p>
+    <p><strong>Skills:</strong> {{ cv.skills }}</p>
+    <p><strong>Experience:</strong> {{ cv.experience }}</p>
+  </div>
+</div>
+{% endblock %}
